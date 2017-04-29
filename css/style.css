@@ -4,6 +4,10 @@
     margin: 10px;
 }
 
+#boxHolder{
+    border: solid gray 5px;
+}
+
 #one{
     background-color: red;
 }
