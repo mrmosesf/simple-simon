@@ -66,7 +66,7 @@
                     $('#two').animate({
                         "background-color": "#0000ff"
                     }, 250).animate({
-                        "background-color": "#0000c3"
+                        "background-color": "#0000af"
                     });
                     break;
                 case 3:
