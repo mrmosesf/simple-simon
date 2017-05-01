@@ -54,44 +54,80 @@
         colors.forEach(function (p1) {
             switch (p1) {
                 case 1:
-                    console.log(1);
-                    $('#one').animate({
-                        "background-color": "#ff0000"
-                    }, 250).animate({
-                        "background-color": "#c30000"
-                    });
+                    redUp();
                     break;
                 case 2:
-                    console.log(2);
-                    $('#two').animate({
-                        "background-color": "#0000ff"
-                    }, 250).animate({
-                        "background-color": "#0000af"
-                    });
+                    blueUp();
                     break;
                 case 3:
-                    console.log(3);
-                    $('#three').animate({
-                        "background-color": "#00ff00"
-                    }, 250).animate({
-                        "background-color": "#00c300"
-                    });
+                    greenUp();
                     break;
                 case 4:
-                    console.log(4);
-                    $('#four').animate({
-                        "background-color": "#fff000"
-                    }, 250).animate({
-                        "background-color": "#c3c300"
-                    });
+                    yellowUp();
                     break;
             }
-        })
+        });
+        gameSteward();
+    }
+
+    //TODO: Create separate functions that will light up a square, to be called from any other function too
+    function redUp() {
+        $('#one').animate({
+            "background-color": "#ff0000"
+        }, 250).animate({
+            "background-color": "#c30000"
+        });
+    }
+
+    function blueUp() {
+        $('#two').animate({
+            "background-color": "#0000ff"
+        }, 250).animate({
+            "background-color": "#0000af"
+        });
+    }
+
+    function greenUp() {
+        $('#three').animate({
+            "background-color": "#00ff00"
+        }, 250).animate({
+            "background-color": "#00c300"
+        });
+    }
+
+    function yellowUp() {
+        $('#four').animate({
+            "background-color": "#fff000"
+        }, 250).animate({
+            "background-color": "#c3c300"
+        });
     }
 
     // TODO: Checks against user inputted sequence, and already generated numbers
-    function gameStweard() {
+    function gameSteward() {
+        $('#one').click(function () {
+            userEvents.push(1);
+            redUp();
+        });
 
+        $('#two').click(function () {
+            userEvents.push(2);
+            blueUp();
+        });
+
+        $('#three').click(function () {
+            userEvents.push(3);
+            greenUp();
+        });
+
+        $('#four').click(function () {
+            userEvents.push(4);
+            yellowUp();
+        });
+
+        if (userEvents.length === gameVars.round){
+            console.log("It's happened");
+        }
     }
 
     // TODO: Adds a number to round counter, and begins UI again, possibly clearing user entered events
