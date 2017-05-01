@@ -56,33 +56,33 @@
                 case 1:
                     console.log(1);
                     $('#one').animate({
-                        "background-color": "rgba(255, 0, 0, 0.5)"
-                    }, 100).animate({
-                        "background-color": "red"
+                        "background-color": "#ff0000"
+                    }, 250).animate({
+                        "background-color": "#c30000"
                     });
                     break;
                 case 2:
                     console.log(2);
                     $('#two').animate({
-                        "background-color": "rgba(0, 0, 255, 0.5)"
-                    }, 100).animate({
-                        "background-color": "blue"
+                        "background-color": "#0000ff"
+                    }, 250).animate({
+                        "background-color": "#0000c3"
                     });
                     break;
                 case 3:
                     console.log(3);
                     $('#three').animate({
-                        "background-color": "rgba(0, 255, 0, 0.5)"
-                    }, 100).animate({
-                        "background-color": "green"
+                        "background-color": "#00ff00"
+                    }, 250).animate({
+                        "background-color": "#00c300"
                     });
                     break;
                 case 4:
                     console.log(4);
                     $('#four').animate({
-                        "background-color": "rgba(255, 255, 0, 0.5)"
-                    }, 100).animate({
-                        "background-color": "yellow"
+                        "background-color": "#fff000"
+                    }, 250).animate({
+                        "background-color": "#c3c300"
                     });
                     break;
             }
