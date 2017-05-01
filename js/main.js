@@ -20,7 +20,7 @@
     // Start game trigger
     startGame();
 
-    // TODO: changes part of game UI, and calls the
+    // Changes part of game UI, and calls the
     function startGame() {
         $('#startGame').click(function () {
             $('#startGame, #currentRound').toggleClass('hidden');
@@ -28,7 +28,7 @@
         });
     }
 
-    // TODO: Start a new round, by updating round counter and game message
+    // Start a new round, by updating round counter and game message
     function roundStart() {
         gameVars.status = "Watch";
         $('#gameMessage').html(gameVars.status);
@@ -40,7 +40,7 @@
     }
 
 
-    // TODO: Adds a random number that will be added to the game sequence, not deleting it
+    // Adds a random number that will be added to the game sequence, not deleting it
     function randomGenerator() {
         var randomSequence = Math.floor(Math.random() * (4 - 1 + 1) + 1);
         gameVars.sequence.push(randomSequence);
@@ -48,7 +48,8 @@
         lightSquares(gameVars.sequence);
     }
 
-    // TODO: Highlights squares, based on a variable that's taken in
+    // Highlights squares, based on a variable that's taken in
+    // TODO: Highlights need to happen in an order, otherwise user will be confused
     function lightSquares(colors) {
         console.log(colors);
         colors.forEach(function (p1) {
@@ -70,7 +71,7 @@
         gameSteward();
     }
 
-    //TODO: Create separate functions that will light up a square, to be called from any other function too
+    // Separate functions that will light up a square, to be called from any other function too
     function redUp() {
         $('#one').animate({
             "background-color": "#ff0000"
@@ -103,6 +104,7 @@
         });
     }
 
+    // Event listeners that the user can click and will added appropriate number to userEvents array with animation
     // TODO: Checks against user inputted sequence, and already generated numbers
     function gameSteward() {
         $('#one').click(function () {
