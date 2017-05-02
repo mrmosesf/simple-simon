@@ -13,7 +13,7 @@
         round: 0,
         status: "",
         lockout: true,
-        delay: 150
+        delay: 200
     };
     /*gameVars*/
 
@@ -42,7 +42,7 @@
         $('#currentRound').html("Round: " + gameVars.round);
 
 
-        console.log("Round started")
+        console.log("Round started");
         randomGenerator();
     }
 
@@ -81,6 +81,7 @@
             }
 
             // After specified delay, the timeout calls each function, in order from the array, with a stepping delay
+
             colorTimeout = setTimeout(callFun, gameVars.delay * 4 * i);
 
         });
@@ -89,9 +90,6 @@
 
         gameVars.lockout = false;
 
-        if (gameVars.round <= 1) {
-            userSteward();
-        }
 
     }
 
@@ -127,7 +125,7 @@
         console.log("User now has control")
 
 
-    }
+    }userSteward();
 
     /*userSteward*/
 
@@ -161,7 +159,7 @@
     function userSuccess() {
         clearTimeout(colorTimeout);
         userEvents = [];
-        roundStart();
+        setTimeout(roundStart, 750);
     }
 
     // TODO: Resets UI to default and setup game to be started again
