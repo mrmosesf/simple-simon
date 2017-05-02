@@ -27,6 +27,7 @@
     function startGame() {
         $('#startGame').click(function () {
             $('#startGame, #currentRound').toggleClass('hidden');
+            $('#startGame').unbind();
             roundStart();
         });
     }
@@ -168,6 +169,8 @@
         userEvents = [];
         gameVars.sequence = [];
         gameVars.round = 0;
+        $('#startGame, #currentRound').toggleClass('hidden');
+        $('#gameMessage').html("Click start to begin");
         startGame();
     }
 
