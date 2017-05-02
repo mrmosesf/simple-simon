@@ -15,7 +15,6 @@
         lockout: true,
         delay: 200
     };
-    /*gameVars*/
 
     var userEvents = [];
     var colorTimeout;
@@ -30,9 +29,7 @@
             $('#startGame').unbind();
             roundStart();
         });
-    }
-
-    /*startGame*/
+    }/*startGame*/
 
     // Start a new round, by updating round counter and game message
     function roundStart() {
@@ -45,9 +42,7 @@
 
         console.log("Round started");
         randomGenerator();
-    }
-
-    /*roundStart*/
+    }/*roundStart*/
 
     // Adds a random number that will be added to the game sequence, not deleting it
     function randomGenerator() {
@@ -57,9 +52,7 @@
         lightSquares(gameVars.sequence);
 
         console.log("A new color has been generated: " + gameVars.sequence);
-    }
-
-    /*randomGenerator*/
+    }/*randomGenerator*/
 
     // Light up squares in the proper sequence as received from the array
     function lightSquares(colors) {
@@ -82,7 +75,6 @@
             }
 
             // After specified delay, the timeout calls each function, in order from the array, with a stepping delay
-
             colorTimeout = setTimeout(callFun, gameVars.delay * 4 * i);
 
         });
@@ -92,51 +84,42 @@
         gameVars.lockout = false;
 
 
-    }
-
-    /*lightSquares*/
+    }/*lightSquares*/
 
     // Event listeners that the user can click and will added appropriate number to userEvents array with animation
-    // TODO: Checks against user inputted sequence, and already generated numbers
     function userSteward() {
-            $('#one').click(function () {
-                userEvents.push(1);
-                redUp();
-                gameSteward();
-            });
+        $('#one').click(function () {
+            userEvents.push(1);
+            redUp();
+            gameSteward();
+        });
 
-            $('#two').click(function () {
-                userEvents.push(2);
-                blueUp();
-                gameSteward();
-            });
+        $('#two').click(function () {
+            userEvents.push(2);
+            blueUp();
+            gameSteward();
+        });
 
-            $('#three').click(function () {
-                userEvents.push(3);
-                greenUp();
-                gameSteward();
-            });
+        $('#three').click(function () {
+            userEvents.push(3);
+            greenUp();
+            gameSteward();
+        });
 
-            $('#four').click(function () {
-                userEvents.push(4);
-                yellowUp();
-                gameSteward();
-            });
+        $('#four').click(function () {
+            userEvents.push(4);
+            yellowUp();
+            gameSteward();
+        });
+    }userSteward();/*userSteward*/
 
-        console.log("User now has control")
-
-
-    }userSteward();
-
-    /*userSteward*/
-
+    // Checks against user inputted sequence, and already generated numbers
     function gameSteward() {
         gameVars.lockout = true;
         console.log("User is now locked out");
 
         var userEventsString = userEvents.join(" ");
         var colorSequence = gameVars.sequence.join(" ");
-
 
         if (userEventsString.length === colorSequence.length) {
             console.log("Checking arrays");
@@ -156,14 +139,14 @@
     }
 
 
-    // TODO: Adds a number to round counter, and begins UI again, possibly clearing user entered events
+    // Adds a number to round counter, and begins UI again, possibly clearing user entered events
     function userSuccess() {
         clearTimeout(colorTimeout);
         userEvents = [];
         setTimeout(roundStart, 750);
     }
 
-    // TODO: Resets UI to default and setup game to be started again
+    // Resets UI to default and setup game to be started again
     function userFail() {
         clearTimeout(colorTimeout);
         userEvents = [];
@@ -174,7 +157,7 @@
         startGame();
     }
 
-// Separate functions that will light up a square, to be called from any other function too
+    // Separate functions that will light up a square, to be called from any other function too
     function redUp() {
         $('#one').animate({
             "background-color": "#ff0000"
@@ -212,7 +195,6 @@
             "background-color": "#c3c300"
         });
     }
-
     /*yellowUp*/
 
 })();
