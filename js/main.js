@@ -25,6 +25,7 @@
     // Changes part of game UI, and calls the
     function startGame() {
         $('#startGame').click(function () {
+            userEvents = [];
             $('#startGame, #currentRound').toggleClass('hidden');
             $('#startGame').unbind();
             roundStart();
@@ -81,8 +82,6 @@
 
         console.log("Colors are being pulsed");
 
-        gameVars.lockout = false;
-
 
     }/*lightSquares*/
 
@@ -129,11 +128,14 @@
                 console.log(colorSequence);
                 userSuccess();
             }
-            else {
+            else if(userEventsString !== colorSequence) {
                 console.log("Nope, failed");
                 console.log(userEventsString);
                 console.log(colorSequence);
                 userFail();
+            }
+            else {
+                userEvents = [];
             }
         }
     }
