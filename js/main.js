@@ -9,14 +9,16 @@
     "use strict";
     // Global variables
     var gameVars = {
-        sequence: [1, 2, 3, 4],
+        sequence: [],
         round: 0,
         status: "",
         lockout: true,
         delay: 150
-    };/*gameVars*/
+    };
+    /*gameVars*/
 
     var userEvents = [];
+    var colorTimeout;
 
     // Start game trigger
     startGame();
@@ -27,7 +29,9 @@
             $('#startGame, #currentRound').toggleClass('hidden');
             roundStart();
         });
-    }/*startGame*/
+    }
+
+    /*startGame*/
 
     // Start a new round, by updating round counter and game message
     function roundStart() {
@@ -37,8 +41,12 @@
         gameVars.round += 1;
         $('#currentRound').html("Round: " + gameVars.round);
 
+
+        console.log("Round started")
         randomGenerator();
-    }/*roundStart*/
+    }
+
+    /*roundStart*/
 
     // Adds a random number that will be added to the game sequence, not deleting it
     function randomGenerator() {
@@ -46,7 +54,11 @@
         gameVars.sequence.push(randomSequence);
 
         lightSquares(gameVars.sequence);
-    }/*randomGenerator*/
+
+        console.log("A new color has been generated: " + gameVars.sequence);
+    }
+
+    /*randomGenerator*/
 
     // Light up squares in the proper sequence as received from the array
     function lightSquares(colors) {
@@ -61,57 +73,104 @@
                     callFun = blueUp;
                     break;
                 case 3:
-                     callFun = greenUp;
+                    callFun = greenUp;
                     break;
                 case 4:
-                     callFun = yellowUp;
+                    callFun = yellowUp;
                     break;
             }
 
             // After specified delay, the timeout calls each function, in order from the array, with a stepping delay
-            setTimeout(callFun, gameVars.delay * 4 * i);
+            colorTimeout = setTimeout(callFun, gameVars.delay * 4 * i);
 
         });
 
-        gameSteward();
+        console.log("Colors are being pulsed");
 
         gameVars.lockout = false;
-    }/*lightSquares*/
+
+        if (gameVars.round <= 1) {
+            userSteward();
+        }
+
+    }
+
+    /*lightSquares*/
 
     // Event listeners that the user can click and will added appropriate number to userEvents array with animation
     // TODO: Checks against user inputted sequence, and already generated numbers
+    function userSteward() {
+            $('#one').click(function () {
+                userEvents.push(1);
+                redUp();
+                gameSteward();
+            });
+
+            $('#two').click(function () {
+                userEvents.push(2);
+                blueUp();
+                gameSteward();
+            });
+
+            $('#three').click(function () {
+                userEvents.push(3);
+                greenUp();
+                gameSteward();
+            });
+
+            $('#four').click(function () {
+                userEvents.push(4);
+                yellowUp();
+                gameSteward();
+            });
+
+        console.log("User now has control")
+
+
+    }
+
+    /*userSteward*/
+
     function gameSteward() {
-        $('#one').click(function () {
-            userEvents.push(1);
-            redUp();
-        });
+        gameVars.lockout = true;
+        console.log("User is now locked out");
 
-        $('#two').click(function () {
-            userEvents.push(2);
-            blueUp();
-        });
+        var userEventsString = userEvents.join(" ");
+        var colorSequence = gameVars.sequence.join(" ");
 
-        $('#three').click(function () {
-            userEvents.push(3);
-            greenUp();
-        });
 
-        $('#four').click(function () {
-            userEvents.push(4);
-            yellowUp();
-        });
-
-    }/*gameSteward*/
+        if (userEventsString.length === colorSequence.length) {
+            console.log("Checking arrays");
+            if (userEventsString === colorSequence) {
+                console.log("Go to next round");
+                console.log(userEventsString);
+                console.log(colorSequence);
+                userSuccess();
+            }
+            else {
+                console.log("Nope, failed");
+                console.log(userEventsString);
+                console.log(colorSequence);
+                userFail();
+            }
+        }
+    }
 
 
     // TODO: Adds a number to round counter, and begins UI again, possibly clearing user entered events
     function userSuccess() {
-
+        clearTimeout(colorTimeout);
+        userEvents = [];
+        roundStart();
     }
 
     // TODO: Resets UI to default and setup game to be started again
     function userFail() {
-
+        clearTimeout(colorTimeout);
+        userEvents = [];
+        gameVars.sequence = [];
+        gameVars.round = 0;
+        startGame();
     }
 
 // Separate functions that will light up a square, to be called from any other function too
@@ -121,7 +180,9 @@
         }, gameVars.delay).animate({
             "background-color": "#c30000"
         });
-    }/*redUp*/
+    }
+
+    /*redUp*/
 
     function blueUp() {
         $('#two').animate({
@@ -129,7 +190,9 @@
         }, gameVars.delay).animate({
             "background-color": "#0000af"
         });
-    }/*blueUp*/
+    }
+
+    /*blueUp*/
 
     function greenUp() {
         $('#three').animate({
@@ -137,7 +200,9 @@
         }, gameVars.delay).animate({
             "background-color": "#00c300"
         });
-    }/*greenUp*/
+    }
+
+    /*greenUp*/
 
     function yellowUp() {
         $('#four').animate({
@@ -145,6 +210,8 @@
         }, gameVars.delay).animate({
             "background-color": "#c3c300"
         });
-    }/*yellowUp*/
+    }
+
+    /*yellowUp*/
 
 })();
