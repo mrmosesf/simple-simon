@@ -145,7 +145,7 @@
     function userSuccess() {
         clearTimeout(colorTimeout);
         userEvents = [];
-        setTimeout(roundStart, 750);
+        setTimeout(roundStart, gameVars.delay * 8);
     }
 
     // Resets UI to default and setup game to be started again
